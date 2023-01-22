@@ -30,13 +30,15 @@ export function Players() {
 					data={["time A", "time B"]}
 					keyExtractor={(item) => item}
 					renderItem={({ item }) => (
-						<Filter title={item} isActive={item === team} onPress={() => setTeam(item)} />
+						<Filter
+							title={item}
+							isActive={item === team}
+							onPress={() => setTeam(item)}
+						/>
 					)}
 					horizontal
 				/>
-				<NumbersOfPlayers>
-					{players.length}
-				</NumbersOfPlayers>
+				<NumbersOfPlayers>{players.length}</NumbersOfPlayers>
 			</HeaderList>
 		</Container>
 	);
