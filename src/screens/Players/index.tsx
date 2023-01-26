@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRoute } from "@react-navigation/native";
-import { Alert, FlatList } from "react-native";
+import { Alert, FlatList, TextInput } from "react-native";
 
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Filter } from "@components/Filter";
@@ -30,6 +30,8 @@ export function Players() {
 	const route = useRoute();
 	const { group } = route.params as RouteParams;
 
+	const newPlayerNameInputRef = useRef<TextInput>(null);
+
 	async function handleAddPlayer() {
 		if (newPlayerName.trim().length === 0) {
 			return Alert.alert(
@@ -45,6 +47,9 @@ export function Players() {
 
 		try {
 			await playerAddByGroup(newPlayer, group);
+
+			newPlayerNameInputRef.current?.blur();
+
 			setNewPlayerName("");
 			fetchPlayersByTeam();
 		} catch (error) {
@@ -81,6 +86,7 @@ export function Players() {
 			<Highlight title={group} subtitle="adicione a galera e separe os times" />
 			<Form>
 				<Input
+					inputRef={newPlayerNameInputRef}
 					placeholder="Nome da pessoa"
 					autoCorrect={false}
 					onChangeText={setNewPlayerName}
