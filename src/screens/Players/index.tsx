@@ -14,7 +14,6 @@ import { Button } from "@components/Button";
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 import { AppError } from "@utils/AppError";
 import { playerAddByGroup } from "@storage/player/playerAddByGroup";
-import { playersGetByGroup } from "@storage/player/playersGetByGroup";
 import { playersGetByGroupAndTeam } from "@storage/player/playersGetByGroupAndTeam";
 import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
 
@@ -91,6 +90,8 @@ export function Players() {
 					autoCorrect={false}
 					onChangeText={setNewPlayerName}
 					value={newPlayerName}
+					onSubmitEditing={handleAddPlayer}
+					returnKeyType="done"
 				/>
 				<ButtonIcon icon="add" onPress={handleAddPlayer} />
 			</Form>
